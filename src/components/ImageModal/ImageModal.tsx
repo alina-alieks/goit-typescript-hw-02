@@ -2,12 +2,21 @@ import css from "./ImageModal.module.css";
 import Modal from "react-modal";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-export default function ImageModal({ isOpen, onCloseModal, src }) {
+interface ImageModalProps {
+  isOpen: boolean;
+  onCloseModal: () => void;
+  src: string;
+}
+
+export default function ImageModal({
+  isOpen,
+  onCloseModal,
+  src,
+}: ImageModalProps) {
   return (
     <div className={css.wrapper}>
       <Modal
         isOpen={isOpen}
-        onClose={onCloseModal}
         closeTimeoutMS={500}
         onRequestClose={onCloseModal}
         overlayClassName={css.overlayClassName}

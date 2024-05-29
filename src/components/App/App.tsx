@@ -5,40 +5,41 @@ import apiRequest from "../../api";
 import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
+import { Image } from "../../types";
 
 import css from "./App.module.css";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 export default function App() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [error, setError] = useState(false);
-  const [query, setQuery] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [src, setSrc] = useState("");
-  const [totalPage, setTotalPage] = useState(0);
+  const [images, setImages] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [error, setError] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [src, setSrc] = useState<string>("");
+  const [totalPage, setTotalPage] = useState<number>(0);
 
-  function openModal() {
+  function openModal(): void {
     setIsOpen(true);
   }
 
-  function closeModal() {
+  function closeModal(): void {
     setIsOpen(false);
   }
 
-  function getImage(value) {
+  function getImage(value: string): void {
     setSrc(value);
   }
 
-  const handleSearch = (query) => {
+  const handleSearch = (query: string): void => {
     setError(false);
     setImages([]);
     setPage(1);
     setQuery(query);
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     setPage(page + 1);
   };
 
@@ -60,6 +61,7 @@ export default function App() {
     }
     getImages();
   }, [query, page]);
+
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
